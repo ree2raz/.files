@@ -129,7 +129,8 @@ alias ll='eza -l --icons --git --group-directories-first'
 alias la='eza -la --icons --git --group-directories-first'
 alias tree='eza --tree --icons'
 
-alias batcat='bat --paging=never'
+alias batcat='batcat --paging=never'
+alias bat="batcat"
 # Clipboard integration (Fixes copy-paste issues)
 alias clip='clip.exe'
 alias explorer='wslview .'
@@ -170,3 +171,13 @@ alias yy='yazi'
 winopen() {
   explorer.exe "$(wslpath -w "$(realpath "$1")")"
 }
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
