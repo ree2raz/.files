@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -123,7 +123,6 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(uv generate-shell-completion bash)"
 . "$HOME/.cargo/env"
 
-alias lh='ls -halt'
 alias ls='eza --icons --group-directories-first'
 alias ll='eza -l --icons --git --group-directories-first'
 alias la='eza -la --icons --git --group-directories-first'
