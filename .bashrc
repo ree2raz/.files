@@ -123,9 +123,10 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(uv generate-shell-completion bash)"
 . "$HOME/.cargo/env"
 
-alias ls='eza --icons --group-directories-first'
-alias ll='eza -l --icons --git --group-directories-first'
-alias la='eza -la --icons --git --group-directories-first'
+alias l='eza -sold'
+alias ls='eza --icons --group-directories-first -sold'
+alias ll='eza -l --icons --git --group-directories-first -sold'
+alias la='eza -la --icons --git --group-directories-first -sold'
 alias tree='eza --tree --icons'
 
 alias batcat='batcat --paging=never'
@@ -180,3 +181,10 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+
+export ANDROID_HOME=/mnt/c/Users/rituraj/AppData/Local/Android/Sdk
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
+
+alias oc='opencode-safe'
+alias opencode='oc'
