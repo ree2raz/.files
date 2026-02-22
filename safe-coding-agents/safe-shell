@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# ~/.local/bin/safe-shell
+
+COMMAND="$*"
+
+# Denylist of destructive patterns
+BLOCKED_PATTERNS=(
+  "rm -rf"
+  "rm -f"
+  "git push --force"
+  "git push -f"
+  "DROP TABLE"
+  "DROP DATABASE"
+  "mkfs"
+  "dd if="
+  "> /dev"
+  "chmod 777"
+  "curl.*|.*bash"
+  "wget.*|.*bash"
+)
+
+for pattern in "${BLOCKED_PATTERNS[@]}"; do
+  if echo "$COMMAND" | grep -qi "$pattern"; then
+    echo "SANDBOX_BLOCK: This command matches restricted pattern '$pattern' and cannot be executed in this environment. Do not retry this command." >&2
+    exit 126 # 126 = command not executable, distinct from 1
+  fi
+done
+
+# Pass through to real bash
+exec /bin/bash "$@"

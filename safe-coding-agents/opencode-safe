@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="${1:-$(pwd)}"
+
+# Adjust these to every .env variant your repo has
+ENV_FILES=(
+  "$PROJECT_DIR/.env"
+  "$PROJECT_DIR/.env.local"
+  "$PROJECT_DIR/.env.production"
+  "$PROJECT_DIR/backend/.env"
+  "$PROJECT_DIR/frontend/.env"
+)
+
+# Build the --ro-bind /dev/null args for each env file
+ENV_BLOCK=""
+for f in "${ENV_FILES[@]}"; do
+  ENV_BLOCK="$ENV_BLOCK --ro-bind /dev/null \"$f\""
+done
+
+eval bwrap \
+  --ro-bind /usr /usr \
+  --ro-bind /lib /lib \
+  --ro-bind /lib64 /lib64 \
+  --ro-bind /bin /bin \
+  --ro-bind "$HOME/.local/bin/safe-shell" /bin/bash \
+  --ro-bind "$HOME/.local/bin/safe-shell" /bin/sh \
+  --ro-bind /etc/resolv.conf /etc/resolv.conf \
+  --ro-bind /etc/hosts /etc/hosts \
+  --ro-bind /etc/ssl /etc/ssl \
+  --ro-bind /etc/passwd /etc/passwd \
+  --ro-bind /etc/group /etc/group \
+  --ro-bind "$HOME/.gitconfig" "$HOME/.gitconfig" \
+  --ro-bind "$HOME/.nvm" "$HOME/.nvm" \
+  --bind "$HOME/.opencode" "$HOME/.opencode" \
+  --bind "$HOME/.config/opencode" "$HOME/.config/opencode" \
+  --bind "$HOME/.local/share/opencode" "$HOME/.local/share/opencode" \
+  --bind "$HOME/.local/state/opencode" "$HOME/.local/state/opencode" \
+  --bind "$PROJECT_DIR" "$PROJECT_DIR" \
+  --tmpfs /tmp \
+  --proc /proc \
+  --dev /dev \
+  --share-net \
+  --unshare-pid \
+  --die-with-parent \
+  --chdir "$PROJECT_DIR" \
+  $ENV_BLOCK \
+  "$HOME/.opencode/bin/opencode" .
