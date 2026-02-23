@@ -188,3 +188,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/lates
 
 alias oc='opencode-safe'
 alias opencode='oc'
+
+alias llmd='llm -m orf'
