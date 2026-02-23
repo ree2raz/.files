@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-# ~/.local/bin/safe-shell
+#!/usr/bin/bash
+
 
 COMMAND="$*"
 
@@ -27,4 +27,4 @@ for pattern in "${BLOCKED_PATTERNS[@]}"; do
 done
 
 # Pass through to real bash
-exec /bin/bash "$@"
+exec /usr/bin/bash "$@"

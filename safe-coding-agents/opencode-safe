@@ -18,6 +18,8 @@ for f in "${ENV_FILES[@]}"; do
   ENV_BLOCK="$ENV_BLOCK --ro-bind /dev/null \"$f\""
 done
 
+CLEAN_PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/' | tr '\n' ':' | sed 's/:$//')
+
 eval bwrap \
   --ro-bind /usr /usr \
   --ro-bind /lib /lib \
@@ -30,8 +32,21 @@ eval bwrap \
   --ro-bind /etc/ssl /etc/ssl \
   --ro-bind /etc/passwd /etc/passwd \
   --ro-bind /etc/group /etc/group \
+  --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
+  --ro-bind /etc/localtime /etc/localtime \
+  --ro-bind /run /run \
+  --ro-bind /sys /sys \
+  --bind /dev/shm /dev/shm \
+  --ro-bind "$HOME/.ssh" "$HOME/.ssh" \
   --ro-bind "$HOME/.gitconfig" "$HOME/.gitconfig" \
   --ro-bind "$HOME/.nvm" "$HOME/.nvm" \
+  --bind "$HOME/.npm" "$HOME/.npm" \
+  --ro-bind "$HOME/.cargo" "$HOME/.cargo" \
+  --bind "$HOME/.cargo/registry" "$HOME/.cargo/registry" \
+  --ro-bind "$HOME/.rustup" "$HOME/.rustup" \
+  --ro-bind "$HOME/.local/bin/uv" "$HOME/.local/bin/uv" \
+  --ro-bind "$HOME/.local/share/uv" "$HOME/.local/share/uv" \
+  --ro-bind "$HOME/.cache/uv" "$HOME/.cache/uv" \
   --bind "$HOME/.opencode" "$HOME/.opencode" \
   --bind "$HOME/.config/opencode" "$HOME/.config/opencode" \
   --bind "$HOME/.local/share/opencode" "$HOME/.local/share/opencode" \
@@ -43,6 +58,7 @@ eval bwrap \
   --share-net \
   --unshare-pid \
   --die-with-parent \
+  --setenv PATH "$CLEAN_PATH" \
   --chdir "$PROJECT_DIR" \
   $ENV_BLOCK \
   "$HOME/.opencode/bin/opencode" .
