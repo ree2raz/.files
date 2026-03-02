@@ -123,6 +123,8 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(uv generate-shell-completion bash)"
 . "$HOME/.cargo/env"
 
+export UV_QUIET=1
+
 alias l='eza -sold'
 alias ls='eza --icons --group-directories-first -sold'
 alias ll='eza -l --icons --git --group-directories-first -sold'
@@ -190,3 +192,15 @@ alias oc='opencode-safe'
 alias opencode='oc'
 
 alias llmd='llm -m orf'
+
+if [[ -z "$ZELLIJ" ]]; then
+  if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+    zellij attach -c
+  else
+    zellij
+  fi
+
+  if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+    exit
+  fi
+fi
