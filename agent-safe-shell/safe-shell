@@ -1,12 +1,12 @@
 #!/usr/bin/bash
 
-
 COMMAND="$*"
 
 # Denylist of destructive patterns
 BLOCKED_PATTERNS=(
   "rm -rf"
   "rm -f"
+  "rmdir"
   "git push --force"
   "git push -f"
   "DROP TABLE"

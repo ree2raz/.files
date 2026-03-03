@@ -13,9 +13,12 @@ ENV_FILES=(
 )
 
 # Build the --ro-bind /dev/null args for each env file
+# only blinds files that actually exist in this project
 ENV_BLOCK=""
 for f in "${ENV_FILES[@]}"; do
-  ENV_BLOCK="$ENV_BLOCK --ro-bind /dev/null \"$f\""
+  if [ -e "$f" ]; then
+    ENV_BLOCK="$ENV_BLOCK --ro-bind /dev/null \"$f\""
+  fi
 done
 
 CLEAN_PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/' | tr '\n' ':' | sed 's/:$//')
