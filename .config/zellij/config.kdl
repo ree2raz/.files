@@ -3,6 +3,11 @@
 //
 
 keybinds clear-defaults=true {
+    normal {
+        bind "Alt r" { NewPane "Right"; }  // Vertical split
+        bind "Alt d" { NewPane "Down"; }   // Horizontal split
+        bind "Alt n" { NewPane; }          // Keep default smart behaviour
+    }
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
     }
@@ -158,7 +163,9 @@ keybinds clear-defaults=true {
         bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
-        bind "Ctrl q" { Quit; }
+        //bind "Ctrl q" { Quit; }
+        bind "Ctrl q" { Detach; }
+        bind "Ctrl k" { Quit; }
     }
     shared_except "locked" "move" {
         bind "Ctrl h" { SwitchToMode "move"; }
@@ -261,7 +268,9 @@ plugins {
     }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    status-bar location="zellij:status-bar"
+    status-bar location="zellij:status-bar" {
+        tooltip "F2"
+    }
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
@@ -406,7 +415,7 @@ copy_clipboard "primary"
 // if it is already running or creates it otherwise.
 // Default: false
 // 
-// attach_to_session true
+//attach_to_session true
  
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:
@@ -541,5 +550,4 @@ show_startup_tips false
 // Note: be sure to escape backslashes and similar characters properly
 // post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"
 //
-
 

@@ -1,0 +1,38 @@
+╭─────────────────────────────────────────╮
+│           ZELLIJ CHEATSHEET             │
+├─────────────┬───────────────────────────┤
+│  PANES      │                           │
+│  Alt n      │  New pane                 │
+│  Alt h/←    │  Focus left               │
+│  Alt l/→    │  Focus right              │
+│  Alt j/↓    │  Focus down               │
+│  Alt k/↑    │  Focus up                 │
+│  Alt =      │  Resize increase          │
+│  Alt -      │  Resize decrease          │
+├─────────────┼───────────────────────────┤
+│  TABS       │                           │
+│  Alt i      │  Previous tab             │
+│  Alt o      │  Next tab                 │
+│  Ctrl t n   │  New tab                  │
+│  Ctrl t x   │  Close tab                │
+│  Ctrl t r   │  Rename tab               │
+├─────────────┼───────────────────────────┤
+│  MODES      │                           │
+│  Ctrl p     │  Pane mode                │
+│  Ctrl t     │  Tab mode                 │
+│  Ctrl n     │  Resize mode              │
+│  Ctrl h     │  Move mode                │
+│  Ctrl s     │  Scroll mode              │
+│  Ctrl o     │  Session mode             │
+│  Ctrl g     │  Lock mode                │
+│  Ctrl q     │  Quit                     │
+├─────────────┼───────────────────────────┤
+│  PANE MODE  │  (after Ctrl p)           │
+│  d          │  Split down               │
+│  r          │  Split right              │
+│  x          │  Close pane               │
+│  f          │  Fullscreen toggle        │
+│  z          │  Frameless toggle         │
+│  w          │  Float toggle             │
+│  Esc        │  Back to Normal           │
+╰─────────────┴───────────────────────────╯
