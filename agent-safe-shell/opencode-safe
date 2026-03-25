@@ -40,6 +40,9 @@ eval bwrap \
   --ro-bind /run /run \
   --ro-bind /sys /sys \
   --bind /dev/shm /dev/shm \
+  --ro-bind /snap /snap \
+  --ro-bind /var/snap /var/snap \
+  --ro-bind /var/lib/snapd /var/lib/snapd \
   --ro-bind "$HOME/.ssh" "$HOME/.ssh" \
   --ro-bind "$HOME/.gitconfig" "$HOME/.gitconfig" \
   --ro-bind "$HOME/.nvm" "$HOME/.nvm" \
