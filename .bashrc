@@ -189,6 +189,7 @@ export ANDROID_SDK_ROOT=$ANDROID_HOME
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
 
 alias oc='opencode-safe'
+#alias oc='opencode'
 alias opencode='oc'
 
 alias llmd='llm -m orf'
@@ -205,4 +206,8 @@ alias llmd='llm -m orf'
 #   fi
 # fi
 #
-alias zz="zellij"
+#alias zz="zellij"
+zz() {
+  local session_name=${1:-${PWD##*/}}
+  zellij attach "$session_name" || zellij -s "$session_name"
+}
