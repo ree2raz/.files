@@ -26,7 +26,7 @@ sudo apt install -y \
   silversearcher-ag \
   net-tools inetutils-ping dnsutils iproute2 \
   whois traceroute nmap \
-  bat eza
+  bat eza bubblewrap
 
 sudo apt install -y ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
 sudo snap install yazi --classic
