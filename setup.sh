@@ -47,7 +47,6 @@ sudo apt install -y \
   apache2-utils
 
 ## DOCKER ##
-sudo apt install -y docker.io docker-compose-v2 podman
 sudo usermod -aG docker "$USER"
 
 ## AWS ##
