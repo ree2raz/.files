@@ -151,3 +151,7 @@ rustup component add rustfmt clippy
 cargo install cargo-watch cargo-run-bin
 # Performance Profiling
 cargo install flamegraph
+
+# git config --global gpg.format ssh
+# git config --global user.signingkey ~/.ssh/id_ed25519.pub
+# git config --global commit.gpgsign true
