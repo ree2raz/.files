@@ -136,7 +136,7 @@ cargo install cargo-watch cargo-run-bin
 # Performance Profiling
 cargo install flamegraph
 
-npm i -g opencode-ai
+curl -fsSL https://opencode.ai/install | bash
 
 # git config --global gpg.format ssh
 # git config --global user.signingkey ~/.ssh/id_ed25519.pub
