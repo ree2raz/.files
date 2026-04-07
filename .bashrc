@@ -4,8 +4,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -32,12 +32,12 @@ shopt -s checkwinsize
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+  debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -46,42 +46,41 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+xterm* | rxvt*)
+  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+  ;;
+*) ;;
 esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  #alias dir='dir --color=auto'
+  #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -102,7 +101,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -117,16 +116,15 @@ if ! shopt -oq posix; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 . "$HOME/.cargo/env"
 
 . "$HOME/.local/bin/env"
 eval "$(uv generate-shell-completion bash)"
 
-
-
 export UV_QUIET=1
+export UV_NO_PROGRESS=1
 
 alias l='eza -sold'
 alias ls='eza --icons --group-directories-first -sold'
@@ -185,7 +183,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-
 export ANDROID_HOME=/mnt/c/Users/rituraj/AppData/Local/Android/Sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
@@ -196,21 +193,41 @@ alias opencode='oc'
 
 alias llmd='llm -m orf'
 
-# if [[ -z "$ZELLIJ" ]]; then
-#   if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-#     zellij attach -c
-#   else
-#     zellij
-#   fi
-#
-#   if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-#     exit
-#   fi
-# fi
-#
-#alias zz="zellij"
-zz() {
-  local session_name=${1:-${PWD##*/}}
-  zellij attach "$session_name" || zellij -s "$session_name"
-}
 export BROWSER=wslview
+alias cl='clear'
+
+export PYTHONUNBUFFERED=1
+
+export QT_X11_NO_MITSHM=1
+
+alias agt='Antigravity .'
+alias zdd='Zed .'
+alias code='code .'
+
+# ─── Zellij ───────────────────────────────────────────────────────────────────
+
+# Tab completions (unconditional — safe inside nested shells too)
+eval "$(zellij setup --generate-completion bash)"
+
+# Auto-start: only in real interactive terminals, not in VSCode/nested/scripts
+if [[ -z "$ZELLIJ" && -z "$VSCODE_INJECTION" && -t 1 ]]; then
+  ZELLIJ_AUTO_ATTACH=true # re-attach to existing session instead of spawning a new one
+  ZELLIJ_AUTO_EXIT=true   # exit shell when you detach from zellij
+  eval "$(zellij setup --generate-auto-start bash)"
+fi
+
+# zz [name] — attach to named session (defaults to current dir), create if absent
+zz() {
+  [[ -n "$ZELLIJ" ]] && echo "Already inside session: $ZELLIJ_SESSION_NAME" && return 1
+  local session_name="${1:-${PWD##*/}}"
+  session_name="${session_name//[^a-zA-Z0-9_-]/-}"
+  zellij attach --create "$session_name"
+}
+
+# zl — fuzzy-pick from all running sessions (requires fzf)
+zl() {
+  [[ -n "$ZELLIJ" ]] && echo "Already inside session: $ZELLIJ_SESSION_NAME" && return 1
+  local session
+  session=$(zellij list-sessions --no-formatting 2>/dev/null | fzf --prompt="Session: ")
+  [[ -n "$session" ]] && zellij attach "$session"
+}
